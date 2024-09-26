@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<unistd.h>
+#include <stdlib.h>
 
 int main(int argc, char *argv[])
 {
@@ -10,11 +11,13 @@ int main(int argc, char *argv[])
     int status = execvp("ls", (char *const[]){"ls","-l", NULL});
     if (status == -1) {
       printf("Terminated Incorrectly\n");
+      exit(1);
     }
   }
   else {
-
-   printf("Done\n");
+    printf("Parent process\n");
+    wait(NULL);
+    printf("Done\n");
   }
   return 0;
 }
